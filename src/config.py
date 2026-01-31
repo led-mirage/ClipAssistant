@@ -51,7 +51,6 @@ class ModeConfig:
 class WindowConfig:
     width: int
     height: int
-    font: str
     font_size: int
 
 

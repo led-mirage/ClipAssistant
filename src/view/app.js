@@ -135,3 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/>/g, "&gt;");
     }
 });
+
+window.addEventListener("pywebviewready", async function() {
+    const fontSize = await pywebview.api.get_font_size();
+    document.documentElement.style.setProperty('--font-size-base', fontSize + 'px');
+});

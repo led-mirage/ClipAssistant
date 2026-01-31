@@ -8,6 +8,7 @@
     --nav-btn-hover: #e0e0e0;
     --font-main: 'Noto Sans JP', 'Inter', sans-serif;
     --font-code: 'Consolas', 'Monaco', monospace;
+    --font-size-base: 14px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -34,7 +35,7 @@ body {
     color: var(--text-color);
     height: 100vh;
     overflow: hidden;
-    font-size: 14px;
+    font-size: var(--font-size-base);
 }
 
 .app-container {

@@ -1,8 +1,14 @@
 import pyperclip
 
+
 class ClipAssistantApi:
     def __init__(self, main_app):
-        self._main_app = main_app
+        from main import ClipAssistantApp
+        self._main_app: ClipAssistantApp = main_app
+
+    def get_font_size(self) -> int:
+        """Get the configured font size."""
+        return self._main_app.config.window.font_size
 
     def set_mode(self, label: str):
         """Set the current processing mode."""
