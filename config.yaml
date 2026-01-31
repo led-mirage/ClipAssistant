@@ -1,0 +1,59 @@
+_file_version: 1
+
+ai:
+  api: OpenAI     # OpenAI or AzureOpenAI or Claude or Gemini
+  model: gpt-5.1
+  openai_api_key_envvar: OPENAI_API_KEY
+  azure_api_key_envvar: AZURE_OPENAI_API_KEY
+  azure_endpoint_envvar: AZURE_OPENAI_ENDPOINT
+  claude_api_key_envvar: ANTHROPIC_API_KEY
+  gemini_api_key_envvar: GEMINI_API_KEY
+
+modes:
+  - label: "翻訳"
+    system_prompt: >
+      あなたは優秀な翻訳者です。
+      意味を変えず、自然で読みやすい日本語に翻訳してください。
+      改行や記号はできるだけ維持してください。
+    user_prompt: >
+      次のテキストを日本語に翻訳してください：
+    usage_message: >
+      Ctrl+Cを2回押すと、選択したテキストを翻訳します。
+    display_original_text: true
+
+  - label: "要約"
+    system_prompt: >
+      あなたは優秀な編集者です。
+      入力されたテキストの内容を要約し、わかりやすく簡潔にまとめてください。
+    user_prompt: >
+      次のテキストを要約してください：
+    usage_message: >
+      Ctrl+Cを2回押すと、選択したテキストを要約します。
+    display_original_text: false
+
+  - label: "校正"
+    system_prompt: >
+      あなたはプロの校正者・編集者です。
+      入力された文章の誤字脱字、文法の誤りを修正し、より自然で洗練された表現に整えてください。
+      修正後の文章だけでなく、「何を、なぜ修正したか」のポイントを簡潔に説明してください。
+    user_prompt: >
+      次の文章を校正・リライトしてください：
+    usage_message: >
+      Ctrl+Cを2回押すと、選択したテキストを校正します。
+    display_original_text: true
+
+  - label: "コード解説"
+    system_prompt: >
+      あなたは熟練したプログラマーです。
+      入力されたコードが何をしているか、初心者にもわかるように解説してください。
+    user_prompt: >
+      このコードを解説してください：
+    usage_message: >
+      Ctrl+Cを2回押すと、選択したプログラムコードの解説を行います。
+    display_original_text: false
+
+window:
+  width: 800
+  height: 400
+  font: Yu Gothic UI
+  font_size: 12

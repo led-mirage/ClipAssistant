@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClipAssistant AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <div class="mode-selector">
+                <select id="modeSelect">
+                    <!-- Options populated by JS -->
+                </select>
+            </div>
+            <div class="history-controls">
+                <select id="historySelect">
+                    <option value="">--- 履歴 ---</option>
+                </select>
+                <button id="prevBtn" class="nav-btn" title="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+                <button id="nextBtn" class="nav-btn" title="Next"><i class="fa-solid fa-chevron-right"></i></button>
+                <button id="copyBtn" class="nav-btn" title="Copy to Clipboard"><i
+                        class="fa-regular fa-clipboard"></i></button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <div id="contentArea" class="content-area">
+                <!-- Content will be injected here -->
+                <div class="placeholder">
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>Unlimited Code Works / © 2026 led-mirage</p>
+        </footer>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="overlay">
+            <div class="spinner-container">
+                <div class="spinner"></div>
+                <p>Thinking...</p>
+                <p id="loadingText" class="loading-subtext"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
