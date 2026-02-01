@@ -1,4 +1,4 @@
-_file_version: 1
+
 
 ai:
   api: OpenAI     # OpenAI or AzureOpenAI or Claude or Gemini
@@ -55,5 +55,5 @@ modes:
 window:
   width: 800
   height: 400
-  font_size: 16
+  font_size: 14
   start_hidden: false
