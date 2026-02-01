@@ -21,6 +21,8 @@
 - **マルチモード対応:** 翻訳、要約、コード校正など、用途に合わせたプロンプト（モード）を瞬時に切り替え可能。
 - **常駐型デザイン:** システムトレイに常駐し、作業を邪魔しません。
 
+<div style="page-break-before:always"></div>
+
 ## 📦 インストールとアンインストール
 
 ### APIキーの登録
@@ -56,6 +58,8 @@
 ## ⌨️ 開発者の方へ
 
 開発者向けの資料（開発環境構築、ビルド方法など）は[こちら](./README_DEV.md)を参照してください。
+
+<div style="page-break-before:always"></div>
 
 ## 🖥️ 動作環境
 
@@ -99,6 +103,8 @@ https://github.com/moses-palmer/pynput
 ライセンス：BSD-3-Clause license  
 https://github.com/asweigart/pyperclip
 
+<div style="page-break-before:always"></div>
+
 ### 🔖 pyyaml 6.0.3
 
 設定ファイルの読み書きに使用  
@@ -110,8 +116,6 @@ https://github.com/yaml/pyyaml
 アイコン画像の処理に使用  
 ライセンス：MIT-CMU License  
 https://github.com/python-pillow/Pillow
-
-<div style="page-break-before:always"></div>
 
 ### 🔖 pystray 0.19.5
 

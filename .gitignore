@@ -208,4 +208,7 @@ __marimo__/
 
 # MySettings
 state.yaml
+README.pdf
+README_CONFIG.pdf
+README_DEV.pdf
 tools/version.txt

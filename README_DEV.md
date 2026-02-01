@@ -13,6 +13,8 @@
 - Git
 
 # ソースを取得
+
+```powershell
 git clone https://github.com/led-mirage/ClipAssistant
 
 # プロジェクトディレクトリに移動

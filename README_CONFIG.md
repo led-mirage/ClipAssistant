@@ -37,6 +37,8 @@ Windows の検索窓で`環境変数を編集`と入力すると、環境変数�
 
 参照する変数名は設定ファイル（`config.yaml`）で変更することができます。
 
+<div style="page-break-before:always"></div>
+
 ## ⚙️ 設定ガイド (`config.yaml`)
 
 `config.yaml` を編集することで、使用するAIモデルや動作を自分好みに変更できます。
@@ -71,6 +73,8 @@ Windows の検索窓で`環境変数を編集`と入力すると、環境変数�
   Google Gemini のエンドポイント URL を格納している **環境変数名** を指定します。
 
 > 💡 環境変数名は、ここで指定した名前が実際に OS に設定されているものと一致している必要があります。
+
+<div style="page-break-before:always"></div>
 
 ### 📌 modes セクション
 
