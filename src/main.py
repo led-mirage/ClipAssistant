@@ -1,3 +1,4 @@
+import subprocess
 import time
 import threading
 import os
@@ -87,7 +88,21 @@ class ClipAssistantApp:
         if hasattr(self, 'tray_icon'):
             self.tray_icon.stop()
         self.window.destroy()
-        sys.exit(0)
+        os._exit(0)
+
+    def restart(self):
+        # 再起動のための処理
+        # 現在のプロセス引数を取得して --restarted を追加
+        args = sys.argv[:]
+        if "--restarted" not in args:
+            args.append("--restarted")
+        
+        # 新しいプロセスを起動
+        # python.exe (または exe化された本体) を引数付きで呼び出す
+        subprocess.Popen([sys.executable] + args)
+        
+        # 自分は終了
+        self.quit()
 
     # ----- Resource helpers -----
     def resource_path(self, relative_path):
@@ -216,6 +231,7 @@ class ClipAssistantApp:
             image = Image.open(icon_path)
             menu = pystray.Menu(
                 pystray.MenuItem("表示", self.tray_show, default=True),
+                pystray.MenuItem("再起動", self.tray_restart),
                 pystray.MenuItem("終了", self.tray_quit),
             )
             self.tray_icon = pystray.Icon(APP_NAME, image, f"{APP_NAME}", menu)
@@ -225,6 +241,9 @@ class ClipAssistantApp:
 
     def tray_show(self, icon=None, item=None):
         self.restore_window()
+
+    def tray_restart(self, icon=None, item=None):
+        self.restart()
 
     def tray_quit(self, icon=None, item=None):
         self.quit()
@@ -236,12 +255,24 @@ def ensure_single_instance(mutex_name: str) -> bool:
     kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
     kernel32.CreateMutexW.argtypes = [wintypes.LPVOID, wintypes.BOOL, wintypes.LPCWSTR]
     kernel32.CreateMutexW.restype = wintypes.HANDLE
+    kernel32.CloseHandle.argtypes = [wintypes.HANDLE]
+    kernel32.CloseHandle.restype = wintypes.BOOL
     kernel32.GetLastError.argtypes = []
     kernel32.GetLastError.restype = wintypes.DWORD
     ERROR_ALREADY_EXISTS = 183
+    
     h = kernel32.CreateMutexW(None, False, mutex_name)
     if not h: return True
-    if kernel32.GetLastError() == ERROR_ALREADY_EXISTS: return False
+    
+    if kernel32.GetLastError() == ERROR_ALREADY_EXISTS:
+        # すでに存在する場合は、今取得したハンドルを閉じる（そうしないと、このプロセスがMutexを保持し続けてしまう）
+        kernel32.CloseHandle(h)
+        return False
+    
+    # 新しく作成できた場合は、ハンドルを保持し続ける（アプリケーション終了時にOSが解放）
+    # グローバル変数等に保持しておかないとGCされる？ -> ctypesの戻り値は単なるintなのでGCされないはずだが、
+    # 関数スコープを抜けてもハンドルはオープンなまま。OSがクリーンアップするのはプロセス終了時。
+    # 明示的に閉じない限り有効。
     return True
 
 def main():
@@ -255,9 +286,26 @@ def main():
             # 古いOSや環境で失敗してもアプリ自体は起動するように
             pass
 
-    if not ensure_single_instance("ClipAssistantApp_Mutex_v1"):
-        ctypes.windll.user32.MessageBoxW(0, "すでに起動しています。タスクトレイをご確認ください。", APP_NAME, 0x40)
-        return
+    mutex_name = "ClipAssistantApp_Mutex_v1"
+    
+    # 再起動時は、以前のプロセスが終了してMutexが解放されるのを待機する
+    if "--restarted" in sys.argv:
+        acquired = False
+        # 0.5秒間隔で最大20回（10秒）リトライ
+        for _ in range(20):
+            if ensure_single_instance(mutex_name):
+                acquired = True
+                break
+            time.sleep(0.5)
+        
+        if not acquired:
+            ctypes.windll.user32.MessageBoxW(0, "再起動に失敗しました（多重起動検出）。", APP_NAME, 0x40)
+            return
+    else:
+        # 通常起動時
+        if not ensure_single_instance(mutex_name):
+            ctypes.windll.user32.MessageBoxW(0, "すでに起動しています。タスクトレイをご確認ください。", APP_NAME, 0x40)
+            return
 
     config = Config.load()
     agent = Agent(config)
