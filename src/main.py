@@ -88,7 +88,7 @@ class ClipAssistantApp:
         # Close PyInstaller splash screen if it exists
         if getattr(sys, 'frozen', False):
             try:
-                import pyi_splash
+                import pyi_splash # type: ignore
                 if pyi_splash.is_alive():
                     pyi_splash.close()
             except ImportError:
@@ -334,7 +334,7 @@ def main():
         # 既に起動している場合、スプラッシュを閉じてからダイアログを出す
         if getattr(sys, 'frozen', False):
             try:
-                import pyi_splash
+                import pyi_splash # type: ignore
                 if pyi_splash.is_alive():
                     pyi_splash.close()
             except ImportError:
