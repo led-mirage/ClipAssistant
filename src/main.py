@@ -21,6 +21,17 @@ from api import ClipAssistantApi
 
 MAX_HISTORY = 100
 
+# ----- Resource helpers -----
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    if hasattr(sys, '_MEIPASS'):
+        base_path = sys._MEIPASS
+    else:
+        # main.py is in src/, so we need to go up one level to get to project root
+        base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    
+    return os.path.join(base_path, relative_path)
+
 class ClipAssistantApp:
     def __init__(self, agent: Agent, config: Config):
         self.config = config
@@ -42,7 +53,7 @@ class ClipAssistantApp:
         # Create window
         self.window = webview.create_window(
             f"{APP_NAME} {APP_VERSION}",
-            url=self.resource_path("src/view/index.html"),
+            url=resource_path("src/view/index.html"),
             width=self.config.window.width,
             height=self.config.window.height,
             js_api=self.api,
@@ -71,6 +82,18 @@ class ClipAssistantApp:
         js = f"window.app.init({json.dumps(modes_data)}, {json.dumps(self.current_mode.label)}, {json.dumps(usage_msg)})"
         self.window.evaluate_js(js)
 
+        if not self.config.window.start_hidden:
+            self.restore_window()
+            
+        # Close PyInstaller splash screen if it exists
+        if getattr(sys, 'frozen', False):
+            try:
+                import pyi_splash
+                if pyi_splash.is_alive():
+                    pyi_splash.close()
+            except ImportError:
+                pass
+
     def on_closing(self):
         if self.is_quitting:
             return True
@@ -89,30 +112,6 @@ class ClipAssistantApp:
             self.tray_icon.stop()
         self.window.destroy()
         os._exit(0)
-
-    def restart(self):
-        # 再起動のための処理
-        # 現在のプロセス引数を取得して --restarted を追加
-        args = sys.argv[:]
-        if "--restarted" not in args:
-            args.append("--restarted")
-        
-        # 新しいプロセスを起動
-        # python.exe (または exe化された本体) を引数付きで呼び出す
-        subprocess.Popen([sys.executable] + args)
-        
-        # 自分は終了
-        self.quit()
-
-    # ----- Resource helpers -----
-    def resource_path(self, relative_path):
-        """ Get absolute path to resource, works for dev and for PyInstaller """
-        if hasattr(sys, '_MEIPASS'):
-            base_path = sys._MEIPASS
-        else:
-            base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        
-        return os.path.join(base_path, relative_path)
 
     # ----- UI interactions -----
     def set_mode(self, label: str):
@@ -225,13 +224,12 @@ class ClipAssistantApp:
         if os.name != "nt":
             return  
 
-        icon_path = self.resource_path("src/view/app.ico")
+        icon_path = resource_path("src/view/app.ico")
         
         try:
             image = Image.open(icon_path)
             menu = pystray.Menu(
                 pystray.MenuItem("表示", self.tray_show, default=True),
-                pystray.MenuItem("再起動", self.tray_restart),
                 pystray.MenuItem("終了", self.tray_quit),
             )
             self.tray_icon = pystray.Icon(APP_NAME, image, f"{APP_NAME}", menu)
@@ -241,9 +239,6 @@ class ClipAssistantApp:
 
     def tray_show(self, icon=None, item=None):
         self.restore_window()
-
-    def tray_restart(self, icon=None, item=None):
-        self.restart()
 
     def tray_quit(self, icon=None, item=None):
         self.quit()
@@ -288,26 +283,21 @@ def main():
 
     mutex_name = "ClipAssistantApp_Mutex_v1"
     
-    # 再起動時は、以前のプロセスが終了してMutexが解放されるのを待機する
-    if "--restarted" in sys.argv:
-        acquired = False
-        # 0.5秒間隔で最大20回（10秒）リトライ
-        for _ in range(20):
-            if ensure_single_instance(mutex_name):
-                acquired = True
-                break
-            time.sleep(0.5)
-        
-        if not acquired:
-            ctypes.windll.user32.MessageBoxW(0, "再起動に失敗しました（多重起動検出）。", APP_NAME, 0x40)
-            return
-    else:
-        # 通常起動時
-        if not ensure_single_instance(mutex_name):
-            ctypes.windll.user32.MessageBoxW(0, "すでに起動しています。タスクトレイをご確認ください。", APP_NAME, 0x40)
-            return
+    if not ensure_single_instance(mutex_name):
+        # 既に起動している場合、スプラッシュを閉じてからダイアログを出す
+        if getattr(sys, 'frozen', False):
+            try:
+                import pyi_splash
+                if pyi_splash.is_alive():
+                    pyi_splash.close()
+            except ImportError:
+                pass
+
+        ctypes.windll.user32.MessageBoxW(0, "すでに起動しています。タスクトレイをご確認ください。", APP_NAME, 0x40)
+        return
 
     config = Config.load()
+    
     agent = Agent(config)
     app = ClipAssistantApp(agent, config)
     app.start()

@@ -48,6 +48,9 @@ pip install pyinstaller pyinstaller-versionfile
 
 # ビルド実行
 tools\build.bat
+
+# スプラッシュ画面なしのバージョンをビルドする場合
+tools\build_nosplash.bat
 ```
 
 ## 💎 Pythonでの実行方法
