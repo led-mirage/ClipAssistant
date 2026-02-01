@@ -117,7 +117,7 @@ https://github.com/python-pillow/Pillow
 ライセンス： LGPL-3.0 license  
 https://github.com/moses-palmer/pystray
 
-### 🔖 pywebview 6.1
+### 🔖 pywebview 5.4
 
 GUIの構築に使用  
 ライセンス： BSD-3-Clause license  

@@ -6,4 +6,4 @@ pyperclip==1.11.0
 pyyaml==6.0.3
 pillow==12.1.0
 pystray==0.19.5
-pywebview==6.1
+pywebview==5.4

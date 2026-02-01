@@ -245,13 +245,6 @@ def ensure_single_instance(mutex_name: str) -> bool:
     return True
 
 def main():
-    if os.name == "nt":
-        try:
-            from ctypes import windll
-            windll.shcore.SetProcessDpiAwareness(1)
-        except Exception:
-            pass
-
     if not ensure_single_instance("ClipAssistantApp_Mutex_v1"):
         ctypes.windll.user32.MessageBoxW(0, "すでに起動しています。タスクトレイをご確認ください。", "起動済み", 0)
         return
