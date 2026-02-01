@@ -245,8 +245,18 @@ def ensure_single_instance(mutex_name: str) -> bool:
     return True
 
 def main():
+    # 最近の高DPIディスプレイ（文字がぼやけないようにする）
+    if os.name == "nt":
+        try:
+            from ctypes import windll
+            # Windows 8.1以降のDPI意識設定
+            windll.shcore.SetProcessDpiAwareness(1)
+        except Exception:
+            # 古いOSや環境で失敗してもアプリ自体は起動するように
+            pass
+
     if not ensure_single_instance("ClipAssistantApp_Mutex_v1"):
-        ctypes.windll.user32.MessageBoxW(0, "すでに起動しています。タスクトレイをご確認ください。", "起動済み", 0)
+        ctypes.windll.user32.MessageBoxW(0, "すでに起動しています。タスクトレイをご確認ください。", APP_NAME, 0x40)
         return
 
     config = Config.load()
