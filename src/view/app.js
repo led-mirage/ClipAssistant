@@ -115,6 +115,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 html += `<div class="original-text">${formatText(original)}</div>`;
             }
             contentArea.innerHTML = html;
+            // Scroll matching container to top
+            if (contentArea.parentElement) {
+                contentArea.parentElement.scrollTop = 0;
+            }
         },
 
         showLoading: (text) => {
