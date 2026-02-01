@@ -113,6 +113,49 @@ class ClipAssistantApp:
         self.window.destroy()
         os._exit(0)
 
+    def reload_config(self):
+        try:
+            # Re-load config without exiting on error
+            new_config = Config.load(exit_on_error=False)
+            self.config = new_config
+            
+            # Re-initialize agent
+            self.agent = Agent(self.config)
+            
+            # Update mode
+            # Try to persist keeping current mode label if it exists in new config
+            current_label = self.state.current_mode_label
+            new_mode = self.config.find_mode(current_label)
+            
+            if new_mode:
+                self.current_mode = new_mode
+            else:
+                # Fallback to first mode available
+                if self.config.modes:
+                    self.current_mode = self.config.modes[0]
+                    self.state.current_mode_label = self.current_mode.label
+                    self.state.save()
+            
+            # Update UI
+            # 1. Update modes list and usage message in JS
+            modes_data = [{"label": m.label} for m in self.config.modes]
+            # We can re-use the init logic or just set content. 
+            # Ideally we have a JS function to update just the config, but init works if we don't mind resetting partial state.
+            
+            js = f"window.app.init({json.dumps(modes_data)}, {json.dumps(self.current_mode.label)}, {json.dumps(self.current_mode.usage_message)})"
+            self.window.evaluate_js(js)
+            
+            # Update font size
+            self.window.evaluate_js(f"window.app.setFontSize({self.config.window.font_size})")
+
+            # Show success toast
+            self.window.evaluate_js("window.app.showToast('設定を再読み込みしました。', 'success')")
+
+        except Exception as e:
+            # Show error toast (escape quotes in error message if needed, simplified here)
+            error_msg = str(e).replace("'", "\\'").replace("\n", " ")
+            self.window.evaluate_js(f"window.app.showToast('設定の再読み込みに失敗しました: {error_msg}', 'error')")
+
     # ----- UI interactions -----
     def set_mode(self, label: str):
         new_mode = self.config.find_mode(label)
@@ -230,6 +273,7 @@ class ClipAssistantApp:
             image = Image.open(icon_path)
             menu = pystray.Menu(
                 pystray.MenuItem("表示", self.tray_show, default=True),
+                pystray.MenuItem("設定の再読み込み", self.tray_reload_config),
                 pystray.MenuItem("終了", self.tray_quit),
             )
             self.tray_icon = pystray.Icon(APP_NAME, image, f"{APP_NAME}", menu)
@@ -239,6 +283,9 @@ class ClipAssistantApp:
 
     def tray_show(self, icon=None, item=None):
         self.restore_window()
+
+    def tray_reload_config(self, icon=None, item=None):
+        self.reload_config()
 
     def tray_quit(self, icon=None, item=None):
         self.quit()

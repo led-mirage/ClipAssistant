@@ -77,10 +77,13 @@ class Config:
     modes: List[ModeConfig] = field(default_factory=list)
 
     @staticmethod
-    def load(path: str = CONFIG_FILE) -> "Config":
+    def load(path: str = CONFIG_FILE, exit_on_error: bool = True) -> "Config":
         if not os.path.exists(path):
-            ctypes.windll.user32.MessageBoxW(0, f"設定ファイル config.yaml が見つかりません。", APP_NAME, 0x10)
-            sys.exit(1)
+            if exit_on_error:
+                ctypes.windll.user32.MessageBoxW(0, f"設定ファイル config.yaml が見つかりません。", APP_NAME, 0x10)
+                sys.exit(1)
+            else:
+                raise FileNotFoundError(f"Config file not found: {path}")
 
         try:
             with open(path, encoding="utf-8") as f:
@@ -102,9 +105,12 @@ class Config:
                 modes=modes_data
             )
         except Exception as e:
-            print(f"Error loading config: {e}")
-            ctypes.windll.user32.MessageBoxW(0, f"設定ファイル config.yaml の読み込みに失敗しました。\n\n{e}\n\n設定ファイルの内容を確認してください。", APP_NAME, 0x10)
-            sys.exit(1)
+            if exit_on_error:
+                print(f"Error loading config: {e}")
+                ctypes.windll.user32.MessageBoxW(0, f"設定ファイル config.yaml の読み込みに失敗しました。\n\n{e}\n\n設定ファイルの内容を確認してください。", APP_NAME, 0x10)
+                sys.exit(1)
+            else:
+                raise e
 
     def find_mode(self, label: str) -> ModeConfig | None:
         found = next((m for m in self.modes if m.label == label), None)

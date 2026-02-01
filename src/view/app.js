@@ -124,6 +124,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
         hideLoading: () => {
             loadingOverlay.classList.remove('active');
+        },
+
+        setFontSize: (size) => {
+            document.documentElement.style.setProperty('--font-size-base', size + 'px');
+        },
+
+        showToast: (message, type = 'info') => {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+
+            container.appendChild(toast);
+
+            // Trigger reflow to enable transition
+            requestAnimationFrame(() => {
+                toast.classList.add('visible');
+            });
+
+            // Remove after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('visible');
+                toast.addEventListener('transitionend', () => {
+                    if (toast.parentElement) {
+                        toast.parentElement.removeChild(toast);
+                    }
+                });
+            }, 3000);
         }
     };
 
@@ -136,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-window.addEventListener("pywebviewready", async function() {
+window.addEventListener("pywebviewready", async function () {
     const fontSize = await pywebview.api.get_font_size();
     document.documentElement.style.setProperty('--font-size-base', fontSize + 'px');
 });
