@@ -101,6 +101,8 @@ https://github.com/anthropics/anthropic-sdk-python
 ライセンス：Apache License 2.0  
 https://github.com/googleapis/python-genai
 
+<div style="page-break-before:always"></div>
+
 ### 🔖 prynput 1.8.1
 
 Ctrl+Cを検出するために使用  
@@ -112,8 +114,6 @@ https://github.com/moses-palmer/pynput
 クリップボードからテキストを取得するために使用  
 ライセンス：BSD-3-Clause license  
 https://github.com/asweigart/pyperclip
-
-<div style="page-break-before:always"></div>
 
 ### 🔖 pyyaml 6.0.3
 
