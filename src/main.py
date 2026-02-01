@@ -46,7 +46,8 @@ class ClipAssistantApp:
             height=self.config.window.height,
             js_api=self.api,
             resizable=True,
-            text_select=True
+            text_select=True,
+            hidden=self.config.window.start_hidden
         )
 
         # Start background threads

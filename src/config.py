@@ -52,6 +52,7 @@ class WindowConfig:
     width: int
     height: int
     font_size: int
+    start_hidden: bool = False
 
 
 @dataclass

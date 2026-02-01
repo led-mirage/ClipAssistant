@@ -56,3 +56,4 @@ window:
   width: 800
   height: 400
   font_size: 16
+  start_hidden: true
