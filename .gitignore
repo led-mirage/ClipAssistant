@@ -211,5 +211,7 @@ state.yaml
 README.pdf
 README_CONFIG.pdf
 README_DEV.pdf
+!ClipAssistant.spec
+!ClipAssistantNS.spec
 tools/version.txt
 !tools/app.manifest
