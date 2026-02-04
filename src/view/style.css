@@ -2,6 +2,8 @@
     --bg-color: #f9f9f9;
     --text-color: #333;
     --accent-color: #007bff;
+    --heading-color: #1a4d8c;
+    /* Calm navy blue */
     --border-color: #e0e0e0;
     --header-bg: #ffffff;
     --footer-bg: #f0f0f0;
@@ -16,6 +18,8 @@
         --bg-color: #1e1e1e;
         --text-color: #e0e0e0;
         --accent-color: #4da3ff;
+        --heading-color: #6ba4e6;
+        /* Softer blue for dark mode */
         --border-color: #333;
         --header-bg: #252526;
         --footer-bg: #2d2d2d;
@@ -129,12 +133,14 @@ main {
 .content-area h3 {
     margin-top: 1em;
     margin-bottom: 0.5em;
-    color: var(--accent-color);
+    color: var(--heading-color);
 }
 
 .content-area code {
     font-family: var(--font-code);
-    background-color: rgba(128, 128, 128, 0.1);
+    background-color: rgba(0, 120, 255, 0.15);
+    color: #0056b3;
+    /* Darker blue for text to ensure contrast */
     padding: 2px 4px;
     border-radius: 3px;
 }
@@ -295,4 +301,77 @@ footer {
         background-color: rgba(255, 255, 255, 0.9);
         color: #333;
     }
+}
+
+/* Markdown Styles */
+.markdown-body {
+    white-space: normal;
+    /* Override pre-wrap from parent */
+    line-height: 1.6;
+}
+
+.markdown-body p {
+    margin-bottom: 1em;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+}
+
+.markdown-body li {
+    margin-bottom: 0.25em;
+}
+
+.markdown-body blockquote {
+    border-left: 4px solid var(--accent-color);
+    padding-left: 1em;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 1em;
+}
+
+.markdown-body table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1em;
+    display: block;
+    overflow-x: auto;
+}
+
+.markdown-body th,
+.markdown-body td {
+    border: 1px solid var(--border-color);
+    padding: 6px 12px;
+}
+
+.markdown-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.markdown-body hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 1.5em 0;
+}
+
+/* Override default pre/code styles for Markdown */
+.markdown-body pre {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+}
+
+.markdown-body pre code.hljs {
+    background-color: #0d1117 !important;
+    /* Force dark background */
+    color: #c9d1d9 !important;
+    border-radius: 6px;
+    padding: 1em;
+    display: block;
+    overflow-x: auto;
+    font-family: var(--font-code);
 }

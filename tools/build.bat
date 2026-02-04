@@ -10,6 +10,7 @@ set VENV_MAKE_VERSION=venv\Scripts\pyivf-make_version.exe
 if exist build rmdir /s /q build
 
 "%VENV_PYTHON%" tools/update_version_yaml.py
+"%VENV_PYTHON%" tools/update_app_manifest.py
 
 "%VENV_MAKE_VERSION%" ^
     --source-format yaml ^
