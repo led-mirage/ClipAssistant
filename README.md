@@ -78,8 +78,8 @@
 そのため、ウイルス対策ソフトによっては誤検知される場合がありますが、ウイルスではありません。
 ソースコードは全て公開されていますので、EXE版の利用に不安がある方は、Python環境を構築してソースコードから実行することを推奨します。
 
-検査結果（VirusTotal）:
-<https://www.virustotal.com/gui/file/84a5ee7d7106659452f7e7d0975702446414a8d31d0d87be43adf37d4c3dd3a8/detection>
+検査結果（VirusTotal）: v1.1.0  
+<https://www.virustotal.com/gui/file/509e957eadd83aba951cb8d7fbd29b6c156f096a4b51c5658496d56f8162a4c7/detection>
 
 ## 📕 使用しているライブラリ
 
@@ -156,7 +156,7 @@ https://github.com/r0x0r/pywebview
 
 ## 🏷️ リリース履歴
 
-### v1.1.0 (2026/02/02)
+### v1.1.0 (2026/02/04)
 - Markdownレンダリングに対応
 - コードブロックのシンタックスハイライト機能を追加
 
