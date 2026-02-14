@@ -78,8 +78,8 @@
 そのため、ウイルス対策ソフトによっては誤検知される場合がありますが、ウイルスではありません。
 ソースコードは全て公開されていますので、EXE版の利用に不安がある方は、Python環境を構築してソースコードから実行することを推奨します。
 
-検査結果（VirusTotal）: v1.1.0  
-<https://www.virustotal.com/gui/file/509e957eadd83aba951cb8d7fbd29b6c156f096a4b51c5658496d56f8162a4c7/detection>
+検査結果（VirusTotal）: v1.1.1 
+<https://www.virustotal.com/gui/file/7f65224ba18da725dbeeb592e43cea62c0826dc63e7811b61059a963e1ceafaf/detection>
 
 ## 📕 使用しているライブラリ
 
@@ -121,7 +121,7 @@ https://github.com/asweigart/pyperclip
 ライセンス：MIT License  
 https://github.com/yaml/pyyaml  
 
-### 🔖 pillow 12.1.0
+### 🔖 pillow 12.1.1
 
 アイコン画像の処理に使用  
 ライセンス：MIT-CMU License  
@@ -155,6 +155,10 @@ https://github.com/r0x0r/pywebview
 © 2026 led-mirage
 
 ## 🏷️ リリース履歴
+
+### v1.1.1 (2026/02/14)
+
+- pillowのバージョンを12.1.1に更新（CVE-2026-25990対応）
 
 ### v1.1.0 (2026/02/04)
 - Markdownレンダリングに対応
