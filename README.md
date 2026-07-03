@@ -78,24 +78,24 @@
 そのため、ウイルス対策ソフトによっては誤検知される場合がありますが、ウイルスではありません。
 ソースコードは全て公開されていますので、EXE版の利用に不安がある方は、Python環境を構築してソースコードから実行することを推奨します。
 
-検査結果（VirusTotal）: v1.1.1 
-<https://www.virustotal.com/gui/file/7f65224ba18da725dbeeb592e43cea62c0826dc63e7811b61059a963e1ceafaf/detection>
+検査結果（VirusTotal）: v1.2.0 
+<https://www.virustotal.com/gui/file/de47373d89af259d3ef2fc2c097d5fbc0173fb43d24aca68cfad91cd8a5c009f/detection>
 
 ## 📕 使用しているライブラリ
 
-### 🔖 openai 2.15.0
+### 🔖 openai 2.44.0
 
 テキスト生成のために使用  
 ライセンス：Apache License 2.0  
 https://github.com/openai/openai-python  
 
-### 🔖 anthropic 0.76.0
+### 🔖 anthropic 0.112.0
 
 テキスト生成のために使用  
 ライセンス：MIT License  
 https://github.com/anthropics/anthropic-sdk-python
 
-### 🔖 google-genai 1.60.0
+### 🔖 google-genai 2.10.0
 
 テキスト生成のために使用  
 ライセンス：Apache License 2.0  
@@ -121,7 +121,7 @@ https://github.com/asweigart/pyperclip
 ライセンス：MIT License  
 https://github.com/yaml/pyyaml  
 
-### 🔖 pillow 12.1.1
+### 🔖 pillow 12.2.0
 
 アイコン画像の処理に使用  
 ライセンス：MIT-CMU License  
@@ -156,8 +156,13 @@ https://github.com/r0x0r/pywebview
 
 ## 🏷️ リリース履歴
 
-### v1.1.1 (2026/02/14)
+### v1.2.0 (2026/07/03)
+- openai ライブラリを 2.44.0 に更新
+- anthropic ライブラリを 0.112.0 に更新
+- google-genai ライブラリを 2.10.0 に更新
+- pillowのバージョンを12.2.0に更新（CVE-2026-40192、CVE-2026-42308、CVE-2026-42309、CVE-2026-42310、CVE-2026-42311対応）
 
+### v1.1.1 (2026/02/14)
 - pillowのバージョンを12.1.1に更新（CVE-2026-25990対応）
 
 ### v1.1.0 (2026/02/04)

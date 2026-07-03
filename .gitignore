@@ -207,6 +207,7 @@ marimo/_lsp/
 __marimo__/
 
 # MySettings
+.python-version
 state.yaml
 README.pdf
 README_CONFIG.pdf
