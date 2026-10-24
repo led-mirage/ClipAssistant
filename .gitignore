@@ -212,6 +212,9 @@ state.yaml
 README.pdf
 README_CONFIG.pdf
 README_DEV.pdf
+README_MODELS.pdf
+README_ALL.md
+README_ALL.pdf
 !ClipAssistant.spec
 !ClipAssistantNS.spec
 tools/version.txt

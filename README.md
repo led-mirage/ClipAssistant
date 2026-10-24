@@ -59,6 +59,8 @@ ClipAssistant AI 1.3.0   [ OpenAI / gpt-5.1 ]
 履歴はアプリの実行中だけ保持され、終了すると消えます。選択したモードは次回起動時に復元します。
 ウィンドウの「×」は非表示にする操作です。再表示やアプリの終了は、システムトレイのメニューから行います。
 
+<div style="page-break-before:always"></div>
+
 ## ⚙️ 設定ガイド (`config.yaml`)
 
 `config.yaml` を編集することで、使用するAIモデルや動作を自分好みに変更できます。
@@ -73,8 +75,6 @@ ClipAssistant AI 1.3.0   [ OpenAI / gpt-5.1 ]
 ## ⌨️ 開発者の方へ
 
 開発者向けの資料（開発環境構築、ビルド方法など）は[こちら](./README_DEV.md)を参照してください。
-
-<div style="page-break-before:always"></div>
 
 ## 🖥️ 動作環境
 
@@ -95,6 +95,8 @@ ClipAssistant AI 1.3.0   [ OpenAI / gpt-5.1 ]
 検査結果（VirusTotal）: v1.3.0
 <https://www.virustotal.com/gui/file/1672e40425c8a703a14467af1fde0c393bed030f4b849004aec7272b19cc53e4/detection>
 
+<div style="page-break-before:always"></div>
+
 ## 📕 使用しているライブラリ
 
 ### 🔖 openai 3.37.0
@@ -114,8 +116,6 @@ https://github.com/anthropics/anthropic-sdk-python
 テキスト生成のために使用  
 ライセンス：Apache License 2.0  
 https://github.com/googleapis/python-genai
-
-<div style="page-break-before:always"></div>
 
 ### 🔖 pynput 1.8.1
 

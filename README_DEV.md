@@ -96,3 +96,22 @@ python -m unittest discover -s tests -v
 ```
 
 詳しい設定・引数・ログの説明は [実APIの接続テスト](tests/README.md) を参照してください。
+
+## 💎 PDF用の結合版Markdownを生成する
+
+プロジェクトのルートで、次のコマンドを実行します。追加ライブラリは不要です。
+
+```powershell
+.\tools\build_docs.bat
+```
+
+`README.md`、`README_CONFIG.md`、`README_MODELS.md`、`README_DEV.md` を順に結合した
+`README_ALL.md` をプロジェクトのルートに生成します。元のMarkdownは変更しません。
+Pythonから直接実行する場合は `python tools/build_docs.py` を使えます。
+
+生成したファイルをVS Codeで開き、Markdown PDF拡張の「Markdown PDF: Export (pdf)」でPDFに変換してください。
+資料間リンクは文書内のアンカーへ変換し、資料ごとに改ページを挿入します。
+結合対象外のファイルへのリンクは、アプリのバージョンに対応するGitHubタグのURLに変換します。
+そのリンクは、対応するタグの公開後に利用できます。
+
+元資料を更新したらコマンドを再実行してください。`README_ALL.md` と `README_ALL.pdf` はGit管理対象外です。
