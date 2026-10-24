@@ -45,13 +45,16 @@ class ClipAssistantApp:
         self.window = None
         self.is_quitting = False
 
+    def get_window_title(self):
+        return f"{APP_NAME} {APP_VERSION}   [ {self.config.ai.api} / {self.config.ai.model} ]"
+
     def start(self):
         # API instance for JS communication
         self.api = ClipAssistantApi(self)
 
         # Create window
         self.window = webview.create_window(
-            f"{APP_NAME} {APP_VERSION}",
+            self.get_window_title(),
             url=resource_path("src/view/index.html"),
             width=self.config.window.width,
             height=self.config.window.height,
@@ -136,6 +139,7 @@ class ClipAssistantApp:
                     self.state.save()
             
             # Update UI
+            self.window.set_title(self.get_window_title())
             # 1. Update modes list and usage message in JS
             modes_data = [{"label": m.label} for m in self.config.modes]
             # We can re-use the init logic or just set content. 
