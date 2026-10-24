@@ -57,8 +57,8 @@ Azureではデプロイ名・APIキーの環境変数名・エンドポイント
 ```yaml
 AzureOpenAI:
   - model: your-deployment-name
-    api_key_envvar: AZURE_OPENAI_EUS_API_KEY
-    endpoint_envvar: AZURE_OPENAI_EUS_ENDPOINT
+    api_key_envvar: AZURE_OPENAI_API_KEY
+    endpoint_envvar: AZURE_OPENAI_ENDPOINT
 ```
 
 複数のセットを並べれば、異なるAzureリソースのデプロイも一括テストできます。

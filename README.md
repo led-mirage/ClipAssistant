@@ -65,6 +65,8 @@ ClipAssistant AI 1.3.0   [ OpenAI / gpt-5.1 ]
 
 詳しくは[こちらの資料](README_CONFIG.md#️-設定ガイド-configyaml)をご参照ください。
 
+モデルIDと接続確認結果は [対応モデル一覧](README_MODELS.md) を参照してください。
+
 設定を保存した後、システムトレイの「設定の再読み込み」でAPI・モデル・モード・フォントサイズを反映できます。
 ウィンドウの幅・高さ・起動時の表示設定は、アプリを再起動すると反映されます。
 
@@ -90,8 +92,8 @@ ClipAssistant AI 1.3.0   [ OpenAI / gpt-5.1 ]
 そのため、ウイルス対策ソフトによっては誤検知される場合がありますが、ウイルスではありません。
 ソースコードは全て公開されていますので、EXE版の利用に不安がある方は、Python環境を構築してソースコードから実行することを推奨します。
 
-検査結果（VirusTotal）: v1.2.0（過去バージョンの検査結果です）
-<https://www.virustotal.com/gui/file/de47373d89af259d3ef2fc2c097d5fbc0173fb43d24aca68cfad91cd8a5c009f/detection>
+検査結果（VirusTotal）: v1.3.0
+<https://www.virustotal.com/gui/file/1672e40425c8a703a14467af1fde0c393bed030f4b849004aec7272b19cc53e4/detection>
 
 ## 📕 使用しているライブラリ
 

@@ -64,6 +64,8 @@ Windowsの設定画面で環境変数を追加・変更した場合は、アプ�
   Azure OpenAIの場合は、Azure側で設定したデプロイ名を指定します。
   現在のOpenAI・Azure OpenAIへの呼び出しはChat Completions APIを使うため、そのAPIに対応するモデルを指定してください。
 
+  モデルIDと接続確認結果は [対応モデル一覧](README_MODELS.md) を参照してください。
+
 - `openai_api_key_envvar`  
   OpenAI 用の API キーを格納している **環境変数名** を指定します。
 
@@ -87,8 +89,8 @@ Azure OpenAIで環境ごとに異なる変数名を使う場合の例です。AP
 ai:
   api: AzureOpenAI
   model: your-deployment-name
-  azure_api_key_envvar: AZURE_OPENAI_EUS_API_KEY
-  azure_endpoint_envvar: AZURE_OPENAI_EUS_ENDPOINT
+  azure_api_key_envvar: AZURE_OPENAI_API_KEY
+  azure_endpoint_envvar: AZURE_OPENAI_ENDPOINT
 ```
 
 現在のAPIとモデル名は、タイトルバーの `バージョン番号   [ API / モデル名 ]` で確認できます。
