@@ -90,8 +90,8 @@ ClipAssistant AI 1.3.0   [ OpenAI / gpt-5.1 ]
 そのため、ウイルス対策ソフトによっては誤検知される場合がありますが、ウイルスではありません。
 ソースコードは全て公開されていますので、EXE版の利用に不安がある方は、Python環境を構築してソースコードから実行することを推奨します。
 
-検査結果（VirusTotal）: v1.1.1（過去バージョンの検査結果です）
-<https://www.virustotal.com/gui/file/7f65224ba18da725dbeeb592e43cea62c0826dc63e7811b61059a963e1ceafaf/detection>
+検査結果（VirusTotal）: v1.2.0（過去バージョンの検査結果です）
+<https://www.virustotal.com/gui/file/de47373d89af259d3ef2fc2c097d5fbc0173fb43d24aca68cfad91cd8a5c009f/detection>
 
 ## 📕 使用しているライブラリ
 
@@ -175,8 +175,14 @@ https://github.com/r0x0r/pywebview
 - Pillowを13.0.0に更新（ソースコード実行時のPython要件を3.11以上に変更）
 - モデル一覧による実APIの一括・単体テストを追加（サービス別集計、SDKバージョン・実行日時を含むログ保存に対応）
 
-### v1.1.1 (2026/02/14)
+### v1.2.0 (2026/07/03)
 
+- openai ライブラリを 2.44.0 に更新
+- anthropic ライブラリを 0.112.0 に更新
+- google-genai ライブラリを 2.10.0 に更新
+- pillowのバージョンを12.2.0に更新（CVE-2026-40192、CVE-2026-42308、CVE-2026-42309、CVE-2026-42310、CVE-2026-42311対応）
+
+### v1.1.1 (2026/02/14)
 - pillowのバージョンを12.1.1に更新（CVE-2026-25990対応）
 
 ### v1.1.0 (2026/02/04)
