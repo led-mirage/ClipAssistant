@@ -215,3 +215,4 @@ README_DEV.pdf
 !ClipAssistantNS.spec
 tools/version.txt
 !tools/app.manifest
+.python-version

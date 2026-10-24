@@ -17,7 +17,7 @@
 ## 🚀 特徴
 
 - **ダブルコピー・トリガー:** Ctrl + C を素早く2回押すだけで、クリップボードのテキストをAIが処理。
-- **マルチ LLM 対応:** OpenAI、Anthropic Claude、Google Gemini といった主要な AI サービスに対応。
+- **マルチ LLM 対応:** OpenAI、Azure OpenAI、Anthropic Claude、Google Gemini に対応。
 - **マルチモード対応:** 翻訳、要約、コード校正など、用途に合わせたプロンプト（モード）を瞬時に切り替え可能。
 - **自由自在なカスタマイズ:** `config.yaml` を編集するだけで、あなただけのオリジナルモードを簡単に追加できます。「関西弁で要約」「コードのバグチェック」など、アイデア次第で可能性は無限大です。
 - **常駐型デザイン:** システムトレイに常駐し、作業を邪魔しません。
@@ -50,11 +50,23 @@
 4. **モードの切り替え** ウィンドウ上部のドロップダウンメニューから、用途に合わせてモード（翻訳、要約など）を変更できます。
 5. **履歴の参照** 左右の矢印ボタン（◀/▶）またはドロップダウンから、過去100件までの履歴をさかのぼることができます。
 
+タイトルバーには、バージョン番号に続いて現在のAPIとモデル名を表示します。
+
+```text
+ClipAssistant AI 1.3.0   [ OpenAI / gpt-5.1 ]
+```
+
+履歴はアプリの実行中だけ保持され、終了すると消えます。選択したモードは次回起動時に復元します。
+ウィンドウの「×」は非表示にする操作です。再表示やアプリの終了は、システムトレイのメニューから行います。
+
 ## ⚙️ 設定ガイド (`config.yaml`)
 
 `config.yaml` を編集することで、使用するAIモデルや動作を自分好みに変更できます。
 
 詳しくは[こちらの資料](README_CONFIG.md#️-設定ガイド-configyaml)をご参照ください。
+
+設定を保存した後、システムトレイの「設定の再読み込み」でAPI・モデル・モード・フォントサイズを反映できます。
+ウィンドウの幅・高さ・起動時の表示設定は、アプリを再起動すると反映されます。
 
 ## ⌨️ 開発者の方へ
 
@@ -65,7 +77,7 @@
 ## 🖥️ 動作環境
 
 - OS: Windows 11
-- Python: 3.10 以上 (ソースコードから実行する場合)
+- Python: 3.11 以上 (ソースコードから実行する場合。Pillow 13.0.0の要件)
 - APIキー: 以下のいずれか
     - OpenAI API Key
     - Anthropic Claude API Key
@@ -78,24 +90,24 @@
 そのため、ウイルス対策ソフトによっては誤検知される場合がありますが、ウイルスではありません。
 ソースコードは全て公開されていますので、EXE版の利用に不安がある方は、Python環境を構築してソースコードから実行することを推奨します。
 
-検査結果（VirusTotal）: v1.1.1 
+検査結果（VirusTotal）: v1.1.1（過去バージョンの検査結果です）
 <https://www.virustotal.com/gui/file/7f65224ba18da725dbeeb592e43cea62c0826dc63e7811b61059a963e1ceafaf/detection>
 
 ## 📕 使用しているライブラリ
 
-### 🔖 openai 2.15.0
+### 🔖 openai 3.37.0
 
 テキスト生成のために使用  
 ライセンス：Apache License 2.0  
 https://github.com/openai/openai-python  
 
-### 🔖 anthropic 0.76.0
+### 🔖 anthropic 2.3.0
 
 テキスト生成のために使用  
 ライセンス：MIT License  
 https://github.com/anthropics/anthropic-sdk-python
 
-### 🔖 google-genai 1.60.0
+### 🔖 google-genai 2.33.0
 
 テキスト生成のために使用  
 ライセンス：Apache License 2.0  
@@ -103,7 +115,7 @@ https://github.com/googleapis/python-genai
 
 <div style="page-break-before:always"></div>
 
-### 🔖 prynput 1.8.1
+### 🔖 pynput 1.8.1
 
 Ctrl+Cを検出するために使用  
 ライセンス：LGPL-3.0 license  
@@ -121,7 +133,7 @@ https://github.com/asweigart/pyperclip
 ライセンス：MIT License  
 https://github.com/yaml/pyyaml  
 
-### 🔖 pillow 12.1.1
+### 🔖 pillow 13.0.0
 
 アイコン画像の処理に使用  
 ライセンス：MIT-CMU License  
@@ -155,6 +167,13 @@ https://github.com/r0x0r/pywebview
 © 2026 led-mirage
 
 ## 🏷️ リリース履歴
+
+### v1.3.0 (2026/10/24)
+
+- タイトルバーに現在のAPIとモデル名を表示し、設定の再読み込み時にも更新
+- AIライブラリを更新（openai 3.37.0、anthropic 2.3.0、google-genai 2.33.0）
+- Pillowを13.0.0に更新（ソースコード実行時のPython要件を3.11以上に変更）
+- モデル一覧による実APIの一括・単体テストを追加（サービス別集計、SDKバージョン・実行日時を含むログ保存に対応）
 
 ### v1.1.1 (2026/02/14)
 

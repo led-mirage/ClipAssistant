@@ -43,9 +43,14 @@ Windows の検索窓で`環境変数を編集`と入力すると、環境変数�
 
 `config.yaml` を編集することで、使用するAIモデルや動作を自分好みに変更できます。
 
+保存後はシステムトレイの「設定の再読み込み」で、API・モデル・モード・フォントサイズを反映できます。
+ウィンドウの幅・高さ・`start_hidden` の変更は、アプリの再起動時に反映されます。
+Windowsの設定画面で環境変数を追加・変更した場合は、アプリも再起動してください。
+
 ### 📌 ai セクション
 
-翻訳に使用する AI サービスやプロンプトを設定します。
+テキスト処理に使用するAIサービス・モデルと、認証情報を取得する環境変数名を設定します。
+プロンプトは後述の `modes` セクションで設定します。
 
 - `api`  
   使用する API を指定します。
@@ -56,6 +61,8 @@ Windows の検索窓で`環境変数を編集`と入力すると、環境変数�
 
 - `model`  
   使用するモデル名を指定します。（例: `gpt-5.1`）
+  Azure OpenAIの場合は、Azure側で設定したデプロイ名を指定します。
+  現在のOpenAI・Azure OpenAIへの呼び出しはChat Completions APIを使うため、そのAPIに対応するモデルを指定してください。
 
 - `openai_api_key_envvar`  
   OpenAI 用の API キーを格納している **環境変数名** を指定します。
@@ -66,13 +73,26 @@ Windows の検索窓で`環境変数を編集`と入力すると、環境変数�
 - `azure_endpoint_envvar`  
   Azure OpenAI のエンドポイント URL を格納している **環境変数名** を指定します。
 
-- `claude_endpoint_envvar`  
-  Anthropic Claude のエンドポイント URL を格納している **環境変数名** を指定します。
+- `claude_api_key_envvar`
+  Anthropic Claude の API キーを格納している **環境変数名** を指定します。
 
-- `gemini_endpoint_envvar`  
-  Google Gemini のエンドポイント URL を格納している **環境変数名** を指定します。
+- `gemini_api_key_envvar`
+  Google Gemini の API キーを格納している **環境変数名** を指定します。
 
 > 💡 環境変数名は、ここで指定した名前が実際に OS に設定されているものと一致している必要があります。
+
+Azure OpenAIで環境ごとに異なる変数名を使う場合の例です。APIキーやURLの実値は環境変数に登録します。
+
+```yaml
+ai:
+  api: AzureOpenAI
+  model: your-deployment-name
+  azure_api_key_envvar: AZURE_OPENAI_EUS_API_KEY
+  azure_endpoint_envvar: AZURE_OPENAI_EUS_ENDPOINT
+```
+
+現在のAPIとモデル名は、タイトルバーの `バージョン番号   [ API / モデル名 ]` で確認できます。
+Azure OpenAIの場合、モデル名の位置にはデプロイ名を表示します。
 
 <div style="page-break-before:always"></div>
 
@@ -86,7 +106,7 @@ AIの「振る舞い」を定義するモードをリスト形式で設定しま
 * **`usage_message`** そのモードを選択した際、テキストエリアに初期表示される説明文です。使い方のヒントを記載しておくと便利です。
 * **`display_original_text`** 生成結果の後に、コピーした元の文章を表示するかどうかを `true` または `false` で指定します。
 
- ####💡 モードのカスタマイズ例
+#### 💡 モードのカスタマイズ例
 
 例えば、コピーした文章を関西弁のお姉さんに要約してもらいたい場合は、以下のように設定を追加します。
 
@@ -100,7 +120,7 @@ AIの「振る舞い」を定義するモードをリスト形式で設定しま
 
 ### 📌 window セクション
 
-翻訳結果を表示するウィンドウの見た目を設定します。
+生成結果を表示するウィンドウの見た目を設定します。
 
 - `width`  
   ウィンドウの幅（ピクセル）
@@ -109,7 +129,7 @@ AIの「振る舞い」を定義するモードをリスト形式で設定しま
   ウィンドウの高さ（ピクセル）
 
 - `font_size`  
-  フォントサイズ（ポイント）
+  フォントサイズ（ピクセル）
 
 - `start_hidden`  
   `true` に設定すると、アプリ起動時にウィンドウを表示せず、タスクトレイに最小化された状態で起動します。（デフォルト: `false`）
