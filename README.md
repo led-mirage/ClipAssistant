@@ -53,7 +53,7 @@
 タイトルバーには、バージョン番号に続いて現在のAPIとモデル名を表示します。
 
 ```text
-ClipAssistant AI 1.3.0   [ OpenAI / gpt-5.1 ]
+ClipAssistant AI 1.3.1   [ OpenAI / gpt-5.1 ]
 ```
 
 履歴はアプリの実行中だけ保持され、終了すると消えます。選択したモードは次回起動時に復元します。
@@ -92,8 +92,8 @@ ClipAssistant AI 1.3.0   [ OpenAI / gpt-5.1 ]
 そのため、ウイルス対策ソフトによっては誤検知される場合がありますが、ウイルスではありません。
 ソースコードは全て公開されていますので、EXE版の利用に不安がある方は、Python環境を構築してソースコードから実行することを推奨します。
 
-検査結果（VirusTotal）: v1.3.0
-<https://www.virustotal.com/gui/file/1672e40425c8a703a14467af1fde0c393bed030f4b849004aec7272b19cc53e4/detection>
+検査結果（VirusTotal）: v1.3.1
+<https://www.virustotal.com/gui/file/016c300b2d936a8fb1a467d1e09507892aa0f2f6285d5bd747b3fa1d7e7b815c/detection>
 
 <div style="page-break-before:always"></div>
 
@@ -169,6 +169,10 @@ https://github.com/r0x0r/pywebview
 © 2026 led-mirage
 
 ## 🏷️ リリース履歴
+
+### v1.3.1 (2026/10/31)
+
+- ビルド環境をPython 3.14.10に更新
 
 ### v1.3.0 (2026/10/24)
 
