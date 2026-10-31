@@ -9,7 +9,7 @@
 ## 💎 開発環境
 
 - Windows 11
-- Python 3.11以上（Pillow 13.0.0の要件。今回の動作確認環境はPython 3.13.12）
+- Python 3.11以上（Pillow 13.0.0の要件。今回の動作確認環境はPython 3.14.10）
 - Git
 
 ## 💎 ソースを取得
